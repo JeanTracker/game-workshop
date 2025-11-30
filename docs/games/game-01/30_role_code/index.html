@@ -2,15 +2,58 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>게임 01 - 코딩 마법사 버전</title>
+  <title>게임 01 - 반짝별 잡기 (베이스)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="placeholder">
-    <h1>코딩 마법사 작업 공간</h1>
-    <p>새로운 규칙이나 애니메이션, 점수 시스템을 추가하고 싶은가요? <strong>main.js</strong>를 수정해서 기능을 확장해 보세요.</p>
-    <a class="btn" href="../00_base/index.html">베이스 코드 보기</a>
+  <header class="hero">
+    <div class="hero__text">
+      <p class="badge">실습 1 · 베이스 버전</p>
+      <h1>반짝별 잡기</h1>
+      <p class="tagline">30초 동안 화면에 나타나는 별을 최대한 많이 눌러 보세요!</p>
+    </div>
+  </header>
+
+  <main class="game-shell" aria-live="polite">
+    <section class="hud">
+      <div class="stat">
+        <span class="label">점수</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="stat">
+        <span class="label">남은 시간</span>
+        <strong><span id="time">30</span>s</strong>
+      </div>
+      <div class="controls">
+        <button id="startButton" type="button">게임 시작</button>
+        <button id="pauseButton" type="button" disabled>일시정지</button>
+      </div>
+    </section>
+
+    <section class="play-area" aria-label="게임 영역">
+      <button class="star hidden" type="button" aria-label="반짝별을 잡아보세요!"></button>
+      <p class="helper">버튼을 누르면 별이 나타나요!</p>
+    </section>
+
+    <section class="guide">
+      <h2>게임 방법</h2>
+      <ol>
+        <li>게임 시작 버튼을 누르면 타이머가 30초에서 시작돼요.</li>
+        <li>보라색 놀이판 안에 별이 무작위로 나타납니다.</li>
+        <li>별을 클릭할 때마다 점수가 올라가고, 별은 다시 다른 곳으로 순간이동해요.</li>
+        <li>시간이 0초가 되면 최종 점수가 기록돼요.</li>
+      </ol>
+    </section>
+
+    <section class="log" aria-live="polite" aria-atomic="true">
+      준비가 되면 게임을 시작해 보세요!
+    </section>
   </main>
+
+  <footer class="footer">
+    <p>다음 역할 실습(아이디어/디자인/코드/밸런스)은 이 베이스 버전을 복사해서 시작합니다.</p>
+  </footer>
+
   <script src="main.js"></script>
 </body>
 </html>

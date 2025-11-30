@@ -1,6 +1,8 @@
 (() => {
-  const GAME_TIME = 30;
-  const STAR_SIZE = 64;
+  const GAME_TIME = 3;
+  const STAR_SIZE = 118;
+  const STAR_RESPAWN_INTERVAL = 700;
+  const STAR_VISIBLE_TIME = 350;
 
   const startButton = document.getElementById('startButton');
   const pauseButton = document.getElementById('pauseButton');
@@ -17,6 +19,8 @@
     playing: false,
     paused: false,
     timerId: null,
+    respawnId: null,
+    hideTimeoutId: null,
   };
 
   startButton.addEventListener('click', () => {
@@ -44,12 +48,12 @@
     }
     state.score += 1;
     scoreEl.textContent = state.score;
-    logEl.textContent = `좋아요! 현재 점수 ${state.score}점`;
-    moveStar();
+    logEl.textContent = `와! 말티즈 ${state.score}마리째 잡았어요. 목표는 1마리!`;
+    spawnStar();
   });
 
   window.addEventListener('resize', () => {
-    if (state.playing) {
+    if (state.playing && !state.paused) {
       moveStar();
     }
   });
@@ -57,13 +61,13 @@
   function startRound() {
     resetState();
     helperEl.classList.add('hidden');
-    star.classList.remove('hidden');
     startButton.disabled = true;
     pauseButton.disabled = false;
     pauseButton.textContent = '일시정지';
-    logEl.textContent = '별이 나타났어요! 빨리 클릭하세요!';
-    moveStar();
+    logEl.textContent = '말티즈가 번개처럼 나타나고 사라져요!';
+    spawnStar();
     startTimer();
+    startRespawnLoop();
   }
 
   function resetState() {
@@ -85,15 +89,40 @@
         return;
       }
       timeEl.textContent = state.timeLeft;
-      if (state.timeLeft % 5 === 0) {
-        logEl.textContent = `${state.timeLeft}초 남았어요!`;
-      }
+      logEl.textContent = `${state.timeLeft}초 남았어요! 말티즈 1마리만 잡으면 성공!`;
     }, 1000);
+  }
+
+  function startRespawnLoop() {
+    clearInterval(state.respawnId);
+    state.respawnId = setInterval(() => {
+      spawnStar();
+    }, STAR_RESPAWN_INTERVAL);
+  }
+
+  function spawnStar() {
+    if (!state.playing || state.paused) {
+      return;
+    }
+    star.classList.remove('hidden');
+    moveStar();
+    scheduleStarHide();
+  }
+
+  function scheduleStarHide() {
+    clearTimeout(state.hideTimeoutId);
+    state.hideTimeoutId = setTimeout(() => {
+      star.classList.add('hidden');
+    }, STAR_VISIBLE_TIME);
   }
 
   function finishRound() {
     clearInterval(state.timerId);
     state.timerId = null;
+    clearInterval(state.respawnId);
+    state.respawnId = null;
+    clearTimeout(state.hideTimeoutId);
+    state.hideTimeoutId = null;
     state.playing = false;
     state.paused = false;
     startButton.disabled = false;
@@ -102,22 +131,32 @@
     pauseButton.textContent = '일시정지';
     star.classList.add('hidden');
     helperEl.classList.remove('hidden');
-    logEl.textContent = `게임 끝! 당신의 점수는 ${state.score}점이에요.`;
+    if (state.score >= 1) {
+      logEl.textContent = `게임 끝! ${state.score}마리 잡았어요. 도망가는 말티즈 임무 성공!`;
+    } else {
+      logEl.textContent = '아쉽지만 한 마리도 잡지 못했어요. 다시 도전해 볼까요?';
+    }
   }
 
   function pauseGame() {
     state.paused = true;
     clearInterval(state.timerId);
     state.timerId = null;
+    clearInterval(state.respawnId);
+    state.respawnId = null;
+    clearTimeout(state.hideTimeoutId);
+    state.hideTimeoutId = null;
     pauseButton.textContent = '다시 시작';
-    logEl.textContent = '일시정지! 다시 시작 버튼을 눌러 보세요.';
+    logEl.textContent = '일시정지! 숨 고르고 다시 이어서 해봐요.';
   }
 
   function resumeGame() {
     state.paused = false;
     pauseButton.textContent = '일시정지';
-    logEl.textContent = '게임 재개! 계속해서 별을 잡아보세요!';
+    logEl.textContent = '게임 재개! 계속해서 말티즈를 쫓아보세요!';
     startTimer();
+    startRespawnLoop();
+    spawnStar();
   }
 
   function moveStar() {

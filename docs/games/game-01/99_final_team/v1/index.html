@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>게임 01 - 도망가는 말티즈 (팀 v1)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__text">
+      <p class="badge">실습 1 · 팀 빌드 v1</p>
+      <h1>도망가는 말티즈</h1>
+      <p class="tagline">도망가는 말티즈를 3초 안에 한 마리라도 잡으면 클리어!</p>
+    </div>
+  </header>
+
+  <main class="game-shell" aria-live="polite">
+    <section class="hud">
+      <div class="stat">
+        <span class="label">잡은 말티즈</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="stat">
+        <span class="label">남은 시간</span>
+        <strong><span id="time">3</span>s</strong>
+      </div>
+      <div class="controls">
+        <button id="startButton" type="button">게임 시작</button>
+        <button id="pauseButton" type="button" disabled>일시정지</button>
+      </div>
+      <p class="goal">🎯 목표: 말티즈 1마리만 잡아도 미션 성공!</p>
+    </section>
+
+    <section class="play-area" aria-label="게임 영역">
+      <button class="star hidden" type="button" aria-label="도망가는 말티즈를 잡아보세요!">
+        <span class="eye eye-left" aria-hidden="true"><span class="spark" aria-hidden="true"></span></span>
+        <span class="eye eye-right" aria-hidden="true"><span class="spark" aria-hidden="true"></span></span>
+      </button>
+      <p class="helper">말티즈가 번개처럼 나타났다 사라져요!</p>
+    </section>
+
+    <section class="guide">
+      <h2>게임 방법</h2>
+      <ol>
+        <li>게임 시작을 누르면 타이머가 3초에서 출발합니다.</li>
+        <li>놀이판 어딘가에 말티즈 얼굴이 순간이동하듯 나타났다 사라집니다.</li>
+        <li>말티즈를 클릭하면 잡은 마리 수가 올라가고, 다음 장소로 도망가요.</li>
+        <li>3초 안에 단 1마리만 잡아도 임무 성공! 일시정지 버튼으로 숨 돌릴 수 있어요.</li>
+      </ol>
+    </section>
+
+    <section class="log" aria-live="polite" aria-atomic="true">
+      준비됐다면 게임 시작을 눌러 도망가는 말티즈를 잡아보세요!
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>v1은 아이디어·디자인·코드·밸런스 요구사항을 모두 합친 결과물입니다.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -41,7 +41,7 @@ body {
 .hero h1 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 3.5rem);
-  color: #2b2478;
+  color: #f05c94;
 }
 
 .tagline {
@@ -70,6 +70,20 @@ body {
   justify-content: space-between;
 }
 
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.goal {
+  flex-basis: 100%;
+  margin: 0;
+  font-weight: 600;
+  color: #4a4c69;
+}
+
 .stat {
   min-width: 120px;
   background: #fff4fd;
@@ -91,13 +105,13 @@ body {
   color: #63637d;
 }
 
-#startButton {
+#startButton,
+#pauseButton {
   flex: 1;
-  min-width: 160px;
+  min-width: 150px;
   padding: 1rem 1.5rem;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(120deg, #ffc7de, #ff95c5 55%, #ffb47d);
   color: white;
   font-size: 1rem;
   font-weight: 700;
@@ -106,13 +120,23 @@ body {
   box-shadow: 0 15px 30px rgba(255, 149, 197, 0.35);
 }
 
-#startButton:disabled {
+#startButton {
+  background: linear-gradient(120deg, #ffc7de, #ff95c5 55%, #ffb47d);
+}
+
+#pauseButton {
+  background: linear-gradient(135deg, #ffb76b, #ff7c4d);
+}
+
+#startButton:disabled,
+#pauseButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-#startButton:not(:disabled):active {
+#startButton:not(:disabled):active,
+#pauseButton:not(:disabled):active {
   transform: translateY(2px);
 }
 
@@ -264,6 +288,11 @@ body {
   .hud {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .controls {
+    width: 100%;
+    flex-direction: column;
   }
 
   .play-area {
