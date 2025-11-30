@@ -10,6 +10,8 @@
   const star = document.querySelector('.star');
   const helperEl = document.querySelector('.helper');
   const logEl = document.querySelector('.log');
+  const popup = document.querySelector('.popup');
+  const nextStageButton = document.getElementById('nextStageButton');
 
   const state = {
     score: 0,
@@ -17,6 +19,8 @@
     playing: false,
     paused: false,
     timerId: null,
+    popupOpen: false,
+    stage: 1,
   };
 
   startButton.addEventListener('click', () => {
@@ -38,14 +42,21 @@
     }
   });
 
+  nextStageButton.addEventListener('click', () => {
+    if (!state.popupOpen || !state.playing) {
+      return;
+    }
+    advanceStage();
+  });
+
   star.addEventListener('click', () => {
-    if (!state.playing || state.paused) {
+    if (!state.playing || state.paused || state.popupOpen) {
       return;
     }
     state.score += 1;
     scoreEl.textContent = state.score;
-    logEl.textContent = `좋아요! 현재 점수 ${state.score}점`;
-    moveStar();
+    logEl.textContent = `와! ${state.score}점 달성! 팝업을 눌러 다음 단계로 이동하세요.`;
+    showPopup();
   });
 
   window.addEventListener('resize', () => {
@@ -61,6 +72,8 @@
     startButton.disabled = true;
     pauseButton.disabled = false;
     pauseButton.textContent = '일시정지';
+    hidePopup();
+    state.stage = 1;
     logEl.textContent = '별이 나타났어요! 빨리 클릭하세요!';
     moveStar();
     startTimer();
@@ -71,6 +84,8 @@
     state.timeLeft = GAME_TIME;
     state.playing = true;
     state.paused = false;
+    state.stage = 1;
+    state.popupOpen = false;
     scoreEl.textContent = state.score;
     timeEl.textContent = state.timeLeft;
   }
@@ -102,6 +117,7 @@
     pauseButton.textContent = '일시정지';
     star.classList.add('hidden');
     helperEl.classList.remove('hidden');
+    hidePopup();
     logEl.textContent = `게임 끝! 당신의 점수는 ${state.score}점이에요.`;
   }
 
@@ -111,6 +127,34 @@
     state.timerId = null;
     pauseButton.textContent = '다시 시작';
     logEl.textContent = '일시정지! 다시 시작 버튼을 눌러 보세요.';
+  }
+
+  function showPopup() {
+    state.popupOpen = true;
+    state.paused = true;
+    star.classList.add('hidden');
+    pauseButton.disabled = true;
+    clearInterval(state.timerId);
+    state.timerId = null;
+    popup.classList.remove('hidden');
+    requestAnimationFrame(() => popup.classList.add('open'));
+  }
+
+  function hidePopup() {
+    popup.classList.remove('open');
+    popup.classList.add('hidden');
+    state.popupOpen = false;
+  }
+
+  function advanceStage() {
+    state.stage += 1;
+    hidePopup();
+    pauseButton.disabled = false;
+    state.paused = false;
+    star.classList.remove('hidden');
+    logEl.textContent = `스테이지 ${state.stage}! 더 빠르게 별을 잡아보세요!`;
+    moveStar();
+    startTimer();
   }
 
   function resumeGame() {

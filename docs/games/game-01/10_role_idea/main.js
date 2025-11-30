@@ -15,6 +15,8 @@
     timeLeft: GAME_TIME,
     playing: false,
     timerId: null,
+    streak: 0,
+    level: 1,
   };
 
   startButton.addEventListener('click', () => {
@@ -29,9 +31,16 @@
     if (!state.playing) {
       return;
     }
-    state.score += 1;
+    state.streak += 1;
+    if (state.streak >= 3) {
+      state.score += 1;
+      state.level += 1;
+      logEl.textContent = `말티즈가 화났어요! ${state.score}점 → 단계 ${state.level}`;
+      celebrateLevelUp();
+    } else {
+      logEl.textContent = `연타 ${state.streak}회! 화나기까지 ${3 - state.streak}번 남았어요.`;
+    }
     scoreEl.textContent = state.score;
-    logEl.textContent = `와! 말티즈 ${state.score}마리째 잡았어요. 목표는 1마리!`;
     moveStar();
   });
 
@@ -46,7 +55,7 @@
     helperEl.classList.add('hidden');
     star.classList.remove('hidden');
     startButton.disabled = true;
-    logEl.textContent = '말티즈가 나타났어요! 한 마리만 잡으면 통과예요!';
+    logEl.textContent = '말티즈가 숨어 있다 나타나요! 연타로 화나게 해서 점수를 얻어 보세요!';
     moveStar();
     startTimer();
   }
@@ -55,6 +64,8 @@
     state.score = 0;
     state.timeLeft = GAME_TIME;
     state.playing = true;
+    state.level = 1;
+    state.streak = 0;
     scoreEl.textContent = state.score;
     timeEl.textContent = state.timeLeft;
   }
@@ -70,7 +81,7 @@
       }
       timeEl.textContent = state.timeLeft;
       if (state.timeLeft % 5 === 0) {
-        logEl.textContent = `${state.timeLeft}초 남았어요! 말티즈 1마리만 잡으면 성공!`;
+        logEl.textContent = `${state.timeLeft}초 남았어요! 단계 ${state.level}에서 계속 연타!`;
       }
     }, 1000);
   }
@@ -84,9 +95,9 @@
     star.classList.add('hidden');
     helperEl.classList.remove('hidden');
     if (state.score >= 1) {
-      logEl.textContent = `게임 끝! ${state.score}마리 잡았어요. 도망가는 말티즈 임무 성공!`;
+      logEl.textContent = `게임 끝! ${state.score}점, 단계 ${state.level}까지 도달했어요!`;
     } else {
-      logEl.textContent = '아쉽지만 한 마리도 잡지 못했어요. 다시 도전해 볼까요?';
+      logEl.textContent = '아쉽지만 말티즈를 화나게 하지 못했어요. 다시 도전해 볼까요?';
     }
   }
 
@@ -99,5 +110,14 @@
     const randomY = Math.random() * maxY;
     star.style.left = `${randomX}px`;
     star.style.top = `${randomY}px`;
+    state.streak = 0;
+  }
+
+  function celebrateLevelUp() {
+    state.streak = 0;
+    star.classList.add('shake');
+    setTimeout(() => {
+      star.classList.remove('shake');
+    }, 350);
   }
 })();

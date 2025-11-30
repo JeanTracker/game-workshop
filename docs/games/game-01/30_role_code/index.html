@@ -33,6 +33,11 @@
     <section class="play-area" aria-label="게임 영역">
       <button class="star hidden" type="button" aria-label="반짝별을 잡아보세요!"></button>
       <p class="helper">버튼을 누르면 별이 나타나요!</p>
+      <div class="popup hidden" role="dialog" aria-modal="true" aria-live="assertive">
+        <p class="popup__title">축하해요!</p>
+        <p class="popup__body">1점을 획득했어요. 다음 단계로 넘어가 볼까요?</p>
+        <button type="button" class="popup__btn" id="nextStageButton">다음 단계 GO</button>
+      </div>
     </section>
 
     <section class="guide">

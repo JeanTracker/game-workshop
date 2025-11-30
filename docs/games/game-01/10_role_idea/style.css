@@ -156,6 +156,28 @@ body {
   transform: scale(0.9);
 }
 
+.shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .hidden {
   display: none;
 }

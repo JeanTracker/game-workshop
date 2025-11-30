@@ -125,6 +125,7 @@ body {
   margin: 0;
   font-size: 1.1rem;
   color: #4b4d76;
+  z-index: 1;
 }
 
 .star {
@@ -137,16 +138,80 @@ body {
   cursor: pointer;
   box-shadow: 0 15px 30px rgba(255, 139, 77, 0.45);
   transition: transform 0.15s ease;
-}
-
-.star::after {
-  content: "★";
-  font-size: 2rem;
-  color: #fff5d7;
+  z-index: 2;
 }
 
 .star:active {
   transform: scale(0.9);
+}
+
+.face {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff5d7;
+}
+
+
+.tree {
+  position: absolute;
+  width: 90px;
+  height: 105px;
+  background: radial-gradient(circle at 40% 30%, #7fdf7d, #38a150);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: 0 12px 25px rgba(34, 73, 64, 0.25);
+  z-index: 3;
+}
+
+.tree.hidden-tree {
+  display: none;
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+  left: 38px;
+  bottom: -35px;
+  width: 14px;
+  height: 50px;
+  background: #a0673f;
+  border-radius: 6px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+.tree-top-left {
+  top: 70px;
+  left: 50px;
+}
+
+.tree-top-right {
+  top: 60px;
+  right: 70px;
+}
+
+.tree-bottom-left {
+  bottom: 70px;
+  left: 40px;
+}
+
+.tree-bottom-right {
+  bottom: 50px;
+  right: 60px;
+}
+
+.tree-center {
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tree-middle-left {
+  top: 190px;
+  left: 120px;
+}
+
+.tree-middle-right {
+  top: 210px;
+  right: 130px;
 }
 
 .hidden {

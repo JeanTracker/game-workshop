@@ -17,6 +17,11 @@
     timerId: null,
   };
 
+  const visuals = {
+    poseStage: 0,
+    moveDelayId: null,
+  };
+
   startButton.addEventListener('click', () => {
     if (state.playing) {
       return;
@@ -32,7 +37,7 @@
     state.score += 1;
     scoreEl.textContent = state.score;
     logEl.textContent = `좋아요! 현재 점수 ${state.score}점`;
-    moveStar();
+    handlePoseSequence();
   });
 
   window.addEventListener('resize', () => {
@@ -45,6 +50,8 @@
     resetState();
     helperEl.classList.add('hidden');
     star.classList.remove('hidden');
+    visuals.poseStage = 0;
+    setPose('back');
     startButton.disabled = true;
     logEl.textContent = '별이 나타났어요! 빨리 클릭하세요!';
     moveStar();
@@ -55,6 +62,9 @@
     state.score = 0;
     state.timeLeft = GAME_TIME;
     state.playing = true;
+    clearTimeout(visuals.moveDelayId);
+    visuals.moveDelayId = null;
+    visuals.poseStage = 0;
     scoreEl.textContent = state.score;
     timeEl.textContent = state.timeLeft;
   }
@@ -78,6 +88,8 @@
   function finishRound() {
     clearInterval(state.timerId);
     state.timerId = null;
+    clearTimeout(visuals.moveDelayId);
+    visuals.moveDelayId = null;
     state.playing = false;
     startButton.disabled = false;
     startButton.textContent = '다시 하기';
@@ -95,5 +107,41 @@
     const randomY = Math.random() * maxY;
     star.style.left = `${randomX}px`;
     star.style.top = `${randomY}px`;
+  }
+
+  function handlePoseSequence() {
+    if (visuals.poseStage === 0) {
+      setPose('turn');
+      visuals.poseStage = 1;
+      scheduleMoveStar(220, false);
+    } else if (visuals.poseStage === 1) {
+      setPose('growl');
+      visuals.poseStage = 2;
+      scheduleMoveStar(320, true);
+    } else {
+      setPose('back');
+      visuals.poseStage = 0;
+      scheduleMoveStar(220, false);
+    }
+  }
+
+  function scheduleMoveStar(delay = 220, resetAfter = false) {
+    clearTimeout(visuals.moveDelayId);
+    visuals.moveDelayId = setTimeout(() => {
+      if (!state.playing) {
+        return;
+      }
+      moveStar();
+      if (resetAfter) {
+        visuals.poseStage = 0;
+        setPose('back');
+      }
+    }, delay);
+  }
+
+  function setPose(pose) {
+    star.classList.remove('pose-back', 'pose-turn', 'pose-growl');
+    const className = pose === 'turn' ? 'pose-turn' : pose === 'growl' ? 'pose-growl' : 'pose-back';
+    star.classList.add(className);
   }
 })();

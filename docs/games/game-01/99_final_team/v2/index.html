@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>게임 01 - 말티즈 찾아 괴롭히기 (v2)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__text">
+      <p class="badge">실습 1 · 팀 빌드 v2</p>
+      <h1>말티즈 찾아 괴롭히기</h1>
+      <p class="tagline">숨어 있는 말티즈가 나타나면 연타로 화를 돋우고 단계를 올려 보세요!</p>
+    </div>
+  </header>
+
+  <main class="game-shell" aria-live="polite">
+    <section class="hud">
+      <div class="stat">
+        <span class="label">현재 단계</span>
+        <strong id="stage">1</strong>
+      </div>
+      <div class="stat">
+        <span class="label">남은 시간</span>
+        <strong><span id="time">10</span>s</strong>
+      </div>
+      <p class="goal">🎯 목표: 말티즈가 사라지기 전에 3번 클릭해서 단계를 클리어!</p>
+      <button id="startButton" type="button">게임 시작</button>
+    </section>
+
+    <section class="play-area" aria-label="게임 영역">
+      <button class="star hidden pose-back" type="button" aria-label="숨어 있는 말티즈를 찾아보세요!">
+        <span class="maltese" aria-hidden="true">
+          <span class="butt">
+            <span class="tail"></span>
+            <span class="leg leg-left"></span>
+            <span class="leg leg-right"></span>
+          </span>
+          <span class="face">
+            <span class="ear ear-left"></span>
+            <span class="ear ear-right"></span>
+            <span class="eye eye-left"></span>
+            <span class="eye eye-right"></span>
+            <span class="nose"></span>
+            <span class="mouth"></span>
+            <span class="brow brow-left"></span>
+            <span class="brow brow-right"></span>
+          </span>
+        </span>
+      </button>
+      <div class="tree tree-top-left" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-top-right" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-bottom-left" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-bottom-right" data-required-stage="2" aria-hidden="true"></div>
+      <div class="tree tree-center" data-required-stage="2" aria-hidden="true"></div>
+      <div class="tree tree-middle-left" data-required-stage="3" aria-hidden="true"></div>
+      <div class="tree tree-middle-right" data-required-stage="3" aria-hidden="true"></div>
+      <p class="helper">말티즈가 잠깐 모습을 드러나요. 3번 클릭하기 전에 사라지니 서둘러요!</p>
+      <div class="popup hidden" role="dialog" aria-modal="true" aria-live="assertive">
+        <p class="popup__title">성공!</p>
+        <p class="popup__body">단계를 클리어했어요. 더 어려운 다음 단계로 넘어갈까요?</p>
+        <button type="button" class="popup__btn" id="nextStageButton">다음 단계 GO</button>
+      </div>
+    </section>
+
+    <section class="guide">
+      <h2>게임 방법</h2>
+      <ol>
+        <li>게임 시작을 누르면 타이머가 10초에서 출발해요.</li>
+        <li>나무 뒤에 숨어 있던 말티즈가 잠깐 나타나 좌우 중 한 방향으로 질주해요.</li>
+        <li>사라지기 전에 3번 클릭하면 단계를 클리어하고 팝업을 눌러 다음 단계로 이동해요.</li>
+        <li>단계가 올라갈수록 말티즈가 빨리 사라지고 나무가 늘어나요.</li>
+      </ol>
+    </section>
+
+    <section class="log" aria-live="polite" aria-atomic="true">
+      준비가 되면 게임 시작 버튼을 눌러 보세요!
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>v2는 아이디어·디자인·코드·밸런스 요구사항을 모두 합쳐 제작된 팀 버전입니다.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

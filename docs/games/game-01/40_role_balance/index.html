@@ -2,43 +2,53 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>게임 01 - 반짝별 잡기 (베이스)</title>
+  <title>게임 01 - 반짝별 잡기 (밸런스)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
     <div class="hero__text">
       <p class="badge">실습 1 · 베이스 버전</p>
-      <h1>반짝별 잡기</h1>
-      <p class="tagline">30초 동안 화면에 나타나는 별을 최대한 많이 눌러 보세요!</p>
+      <h1>말티즈 술래잡기</h1>
+      <p class="tagline">숨어있는 말티즈가 모습을 드러낼 때 3번 클릭해 단계를 클리어하세요!</p>
     </div>
   </header>
 
   <main class="game-shell" aria-live="polite">
     <section class="hud">
       <div class="stat">
-        <span class="label">점수</span>
-        <strong id="score">0</strong>
+        <span class="label">현재 단계</span>
+        <strong id="stage">1</strong>
       </div>
       <div class="stat">
         <span class="label">남은 시간</span>
-        <strong><span id="time">30</span>s</strong>
+        <strong><span id="time">10</span>s</strong>
       </div>
       <button id="startButton" type="button">게임 시작</button>
     </section>
 
     <section class="play-area" aria-label="게임 영역">
-      <button class="star hidden" type="button" aria-label="반짝별을 잡아보세요!"></button>
-      <p class="helper">버튼을 누르면 별이 나타나요!</p>
+      <button class="star hidden" type="button" aria-label="떨어지는 말티즈를 잡아보세요!">
+        <span class="face" aria-hidden="true">／ᐠ.ꞈ.ᐟ\\</span>
+      </button>
+      <div class="tree tree-top-left" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-top-right" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-bottom-left" data-required-stage="1" aria-hidden="true"></div>
+      <div class="tree tree-bottom-right" data-required-stage="2" aria-hidden="true"></div>
+      <div class="tree tree-center" data-required-stage="2" aria-hidden="true"></div>
+      <div class="tree tree-middle-left" data-required-stage="3" aria-hidden="true"></div>
+      <div class="tree tree-middle-right" data-required-stage="3" aria-hidden="true"></div>
+      <p class="helper">말티즈가 나무 뒤에서 튀어나와 한 방향으로 달려요. 화면 밖으로 나가기 전에 3번 클릭!</p>
     </section>
 
     <section class="guide">
       <h2>게임 방법</h2>
       <ol>
-        <li>게임 시작 버튼을 누르면 타이머가 30초에서 시작돼요.</li>
-        <li>보라색 놀이판 안에 별이 무작위로 나타납니다.</li>
-        <li>별을 클릭할 때마다 점수가 올라가고, 별은 다시 다른 곳으로 순간이동해요.</li>
-        <li>시간이 0초가 되면 최종 점수가 기록돼요.</li>
+        <li>게임 시작을 누르면 타이머가 10초에서 출발합니다.</li>
+        <li>말티즈는 나무 뒤에서 잠깐 모습을 드러낸 뒤 한 방향으로 질주해요.</li>
+        <li>사라지기 전에 <strong>3번</strong> 클릭하면 단계를 클리어하고 다음 단계로 넘어가요.</li>
+        <li>단계가 올라갈수록 말티즈가 더 빨리 사라지고 나무 장애물이 늘어나요.</li>
+        <li>시간이 0초가 되면 그때까지 도전한 단계가 기록돼요.</li>
       </ol>
     </section>
 

@@ -2,15 +2,15 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>게임 01 - 도망가는 말티즈 (아이디어)</title>
+  <title>게임 01 - 말티즈 찾아 괴롭히기 (아이디어)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
     <div class="hero__text">
       <p class="badge">실습 1 · 아이디어 버전</p>
-      <h1>도망가는 말티즈</h1>
-      <p class="tagline">도망가는 말티즈를 한 마리 이상 잡으면 미션 성공이에요!</p>
+      <h1>말티즈 찾아 괴롭히기</h1>
+      <p class="tagline">숨어 있는 말티즈가 모습을 드러낼 때 빠르게 연타해 점수를 얻어 보세요!</p>
     </div>
   </header>
 
@@ -24,22 +24,23 @@
         <span class="label">남은 시간</span>
         <strong><span id="time">30</span>s</strong>
       </div>
-      <p class="goal">🎯 목표: 말티즈 1마리만 잡아도 통과!</p>
+      <p class="goal">🎯 목표: 말티즈를 화나게 해 1점을 얻으면 더 어려운 다음 단계로 이동!</p>
       <button id="startButton" type="button">게임 시작</button>
     </section>
 
     <section class="play-area" aria-label="게임 영역">
-      <button class="star hidden" type="button" aria-label="도망가는 말티즈를 잡아보세요!"></button>
-      <p class="helper">말티즈가 순식간에 나타났다 사라집니다!</p>
+      <button class="star hidden" type="button" aria-label="숨어 있는 말티즈를 괴롭혀 보세요!"></button>
+      <p class="helper">말티즈가 갑자기 튀어나오면 재빨리 연타해 화나게 하세요!</p>
     </section>
 
     <section class="guide">
       <h2>게임 방법</h2>
       <ol>
         <li>게임 시작 버튼을 누르면 타이머가 30초에서 시작돼요.</li>
-        <li>보라색 놀이판 어디엔가 말티즈가 갑자기 나타납니다.</li>
-        <li>말티즈를 클릭하면 “잡은 마리 수”가 올라가고 바로 다른 곳으로 도망가요.</li>
-        <li>시간이 0초가 되면 최종 잡은 마리 수가 기록되고, 1마리 이상이면 미션 성공!</li>
+        <li>보라색 놀이판 어디엔가 말티즈가 불쑥 나타납니다.</li>
+        <li>말티즈를 빠르게 연타하면 더 화가 나고 점수를 얻을 수 있어요.</li>
+        <li>점수 1점을 얻으면 말티즈가 더 교활해진 다음 단계로 넘어가요.</li>
+        <li>시간이 0초가 되면 최종 점수가 기록됩니다. 단계가 올라갈수록 난이도가 높아져요!</li>
       </ol>
     </section>
 
