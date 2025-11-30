@@ -3,19 +3,111 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>우리 팀 게임 버전 모음</title>
+  <title>우리 팀 게임 워크숍</title>
+  <style>
+    :root {
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f6ff;
+      color: #121330;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main {
+      width: min(960px, 92vw);
+      background: #fff;
+      padding: 3rem;
+      border-radius: 32px;
+      box-shadow: 0 25px 60px rgba(18, 19, 48, 0.15);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #2b2478;
+    }
+
+    .game-card {
+      margin-top: 2rem;
+      border: 1px solid #ecebff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #fdfcff, #f5f0ff);
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: #ece2ff;
+      color: #5c3bff;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    ul.versions {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    ul.versions li {
+      background: white;
+      border-radius: 999px;
+      padding: 0.65rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #e8e6ff;
+    }
+
+    ul.versions span {
+      font-weight: 600;
+      color: #4c458f;
+    }
+
+    ul.versions a {
+      color: #5c3bff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: #5b5d80;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h1>우리 팀 게임 버전 모음</h1>
-  <p>아래 링크를 눌러 각 버전의 게임을 플레이해 보세요.</p>
-  <ul>
-    <li><a href="./games/00_base/index.html">베이스 버전</a></li>
-    <li><a href="./games/10_role_idea/index.html">아이디어 발명가 버전</a></li>
-    <li><a href="./games/20_role_ui/index.html">화면 디자이너 버전</a></li>
-    <li><a href="./games/30_role_code/index.html">코딩 마법사 버전</a></li>
-    <li><a href="./games/40_role_balance/index.html">룰/밸런스 마스터 버전</a></li>
-    <li><a href="./games/99_final_team/index.html">최종 팀 버전</a></li>
-  </ul>
+  <main>
+    <h1>우리 팀 게임 워크숍</h1>
+    <p>실습 번호별로 게임을 만들고, 각 역할(아이디어, UI, 코드, 밸런스, 팀 빌드)로 확장합니다.</p>
+
+    <section class="game-card">
+      <p class="badge">실습 1</p>
+      <h2>반짝별 잡기</h2>
+      <p>무작위로 나타나는 별을 클릭해서 점수를 모으는 빠른 반응형 게임입니다.</p>
+      <ul class="versions">
+        <li><span>00 · 베이스</span> <a href="./games/game-01/00_base/index.html">바로 가기</a></li>
+        <li><span>10 · 아이디어 발명가</span> <a href="./games/game-01/10_role_idea/index.html">작업 공간</a></li>
+        <li><span>20 · 화면 디자이너</span> <a href="./games/game-01/20_role_ui/index.html">작업 공간</a></li>
+        <li><span>30 · 코딩 마법사</span> <a href="./games/game-01/30_role_code/index.html">작업 공간</a></li>
+        <li><span>40 · 룰/밸런스 마스터</span> <a href="./games/game-01/40_role_balance/index.html">작업 공간</a></li>
+        <li><span>99 · 최종 팀 버전</span> <a href="./games/game-01/99_final_team/index.html">버전 보관함</a></li>
+      </ul>
+    </section>
+
+    <footer>새로운 실습이 시작되면 game-02, game-03 ... 폴더를 같은 방식으로 추가합니다.</footer>
+  </main>
 </body>
 </html>
-

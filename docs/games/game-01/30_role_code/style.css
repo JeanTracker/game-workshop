@@ -1,0 +1,45 @@
+:root {
+  font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f8f5ff;
+  color: #1f174a;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder {
+  width: min(90vw, 520px);
+  padding: 2.5rem;
+  text-align: center;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(31, 23, 74, 0.12);
+}
+
+.placeholder h1 {
+  margin-bottom: 1rem;
+}
+
+.placeholder p {
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #5c3bff;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #4529d4;
+}
